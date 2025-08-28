@@ -5,6 +5,7 @@ from .ml_models import KnotTransformer, GNNRLPolicy
 from .simplifiers import apply_z_move, factorize
 from .utils import quick_invariants, is_unknot, get_loci, compute_density
 from .snappy_proxy import Link, Manifold  # Use proxy
+import random
 
 class TopoKEMP:
     def __init__(self, beta=1.0, use_ml=True, certified=False):
