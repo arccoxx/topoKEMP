@@ -1,5 +1,6 @@
 from queue import PriorityQueue
 import torch
+import random  # Added for random in diagram_to_graph
 from .ml_models import KnotTransformer, GNNRLPolicy
 from .simplifiers import apply_z_move, factorize
 from .utils import quick_invariants, is_unknot, get_loci, compute_density
@@ -66,7 +67,9 @@ class TopoKEMP:
         return sub
 
     def diagram_to_graph(self, knot):
-        return [random.random() for _ in range(10)]  # Dummy state list for test
+        import networkx as nx
+        G = nx.Graph()
+        return G
 
     def update_state(self, knot):
         return self.diagram_to_graph(knot)
