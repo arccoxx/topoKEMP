@@ -1,4 +1,4 @@
-from ...core import TopoKEMP
+from ..topoKEMP.core import TopoKEMP
 def embed_generic(instance, beta):
     return [1, -2, 3, -1, 2]  # Dummy braid for diagram
 solver = TopoKEMP(use_ml=False)
