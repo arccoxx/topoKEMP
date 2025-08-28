@@ -10,20 +10,24 @@ def dna_adapter(sequence):
 
 def protein_adapter(pdb_id):
     parser = PDBParser()
-    return {'structure': parser.get_structure('prot', pdb_id)}
+    structure = parser.get_structure('prot', pdb_id)
+    chain_len = len(list(structure.get_chains())[0])
+    return {'chain_len': chain_len}  # Return length for embed
 
 def molecular_adapter(smiles):
-    return {'mol': Chem.MolFromSmiles(smiles)}
+    mol = Chem.MolFromSmiles(smiles)
+    bonds = mol.GetBonds()
+    return {'bonds_len': len(bonds)}  # Length for embed
 
 def polymer_adapter(monomers):
-    return {'chain': [1] * monomers}  # Dummy
+    return {'chain_len': monomers if isinstance(monomers, int) else len(monomers)}
 
 def quantum_adapter(gates):
-    return {'circuit': qt.Qobj(gates)}  # Simplified
+    return {'gates': gates}  # List for len, avoid Qobj
 
 def fluid_adapter(field_lines):
-    return {'lines': field_lines}
+    return {'lines_len': len(field_lines)}
 
 def robotics_adapter(paths):
     G = nx.Graph(paths)
-    return {'graph': G}
+    return {'edges_len': G.number_of_edges(), 'nodes_len': G.number_of_nodes()}
