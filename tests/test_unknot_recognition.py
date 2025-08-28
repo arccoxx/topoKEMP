@@ -1,5 +1,6 @@
 import os
 os.chdir('..')
+print("New directory:", os.getcwd())
 from topoKEMP.core import TopoKEMP
 def embed_generic(instance, beta):
     return [1, -2, 3, -1, 2]  # Dummy braid for diagram
