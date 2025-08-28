@@ -28,14 +28,14 @@ TopoKEMP excels for problems reducible to knot properties (e.g., small NP-hard l
    git clone https://github.com/arccoxx/topoKEMP.git
    cd topoKEMP
    ```
-2. Install dependencies (non-ML core; no SnapPy needed for proxy mode):
+2. cd into topoKEMP:
+   %cd topoKEMP
+   
+4. Install dependencies (non-ML core; no SnapPy needed for proxy mode):
    ```
    pip install -r requirements.txt
    ```
-3. Install the package in editable mode:
-   ```
-   pip install -e .
-   ```
+
 For real knot computations (recommended), install SnapPy separately per https://snappy.computop.org/installing.html, then replace proxy imports in core.py/utils.py with `import snappy`.
 
 ## Usage
