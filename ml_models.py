@@ -12,12 +12,12 @@ class KnotTransformer(nn.Module):
         self.fc = nn.Linear(10, 2)  # Dummy for list input
 
     def forward(self, x):
-        return self.fc(torch.tensor(x))
+        return self.fc(x)
 
     def classify(self, state):
         with torch.no_grad():
             output = self.forward(state)
-            prob = torch.softmax(output, dim=0)[1].item()
+            prob = torch.softmax(output, dim=1)[0][1].item()
             return prob
 
 class GNNRLPolicy(nn.Module):
@@ -28,7 +28,7 @@ class GNNRLPolicy(nn.Module):
         self.critic = nn.Linear(32, 1)
 
     def forward(self, state):
-        embed = torch.relu(self.fc1(torch.tensor(state)))
+        embed = torch.relu(self.fc1(state))
         return self.actor(embed), self.critic(embed)
 
     def classify(self, state):
