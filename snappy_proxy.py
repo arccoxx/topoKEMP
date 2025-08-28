@@ -1,8 +1,6 @@
 # snappy_proxy.py
-# This is a minimal proxy for SnapPy's key functionalities used in TopoKEMP.
-# It provides placeholder implementations for testing/development without the full SnapPy library.
-# Note: This is NOT a full replacement—use for prototyping only; replace with real SnapPy for production.
-# Tested with code execution: Creates Link from braid, simplifies (reduces crossings by 50%), computes invariants (dummy polynomials), volume (0 if trivial), normal_surfaces (dummy list).
+# Minimal proxy for SnapPy's key functionalities used in TopoKEMP.
+# Placeholder for testing; NOT full replacement.
 
 class Manifold:
     def __init__(self, knot):
@@ -24,7 +22,7 @@ class Manifold:
 class Link:
     def __init__(self, braid=None):
         self.braid = braid or [1, -1]  # Default minimal
-        self._crossings = len(self.braid)  # Initial crossings from braid length
+        self._crossings = len(self.braid)  # Initial from braid length
         self._simplified = False
         self.manifold = Manifold(self)
 
@@ -38,13 +36,13 @@ class Link:
         return self._crossings
 
     def jones_polynomial(self):
-        # Dummy Laurent polynomial: 1 for unknot, else t^{-1} - t^3 + ...
+        # Dummy: 1 for unknot, else example string
         if self.crossing_number() == 0:
             return 1
-        return "t^{-1} - t^3 + t^4"  # Example for trefoil
+        return "t^{-1} - t^3 + t^4"  # Trefoil-like
 
     def alexander_polynomial(self):
-        # Dummy: 1 for unknot, else t^2 - t + 1
+        # Dummy: 1 for unknot, else example
         if self.crossing_number() == 0:
             return 1
         return "t^2 - t + 1"
