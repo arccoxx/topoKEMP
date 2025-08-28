@@ -1,10 +1,11 @@
-# utils.py (updated to ensure length is int in generate_random_braid)
+# utils.py (updated to ensure int in generate_random_braid, avoiding TypeError)
 import random
 import numpy as np
 
 def generate_random_braid(num_strands=3, length=20):
+    num_strands = int(num_strands)  # Ensure int for range
     generators = list(range(1, num_strands)) + list(range(-num_strands + 1, 0))
-    length = int(length)  # Ensure int to avoid TypeError in range
+    length = int(length)  # Ensure int
     braid_word = [random.choice(generators) for _ in range(length)]
     braid_str = ' '.join(map(str, braid_word))
     try:
