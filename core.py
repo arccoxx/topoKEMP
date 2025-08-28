@@ -10,22 +10,20 @@ class TopoKEMP:
         self.beta = beta
         self.use_ml = use_ml
         self.certified = certified
-        print("Using SnapPy version:", snappy.__version__)  # Version check
-        if snappy.__version__ < '3.2':
-            print("Warning: SnapPy <3.2 may have limited features.")
         self.transformer = KnotTransformer() if use_ml else None
         self.policy = GNNRLPolicy() if use_ml else None
-        try:
-            self.transformer.load_state_dict(torch.load('transformer.pth'))
-            self.policy.load_state_dict(torch.load('gnn_rl.pth'))
-        except FileNotFoundError:
-            print("ML models not trained; run train_ml_models() first.")
+        if self.use_ml:
+            try:
+                self.transformer.load_state_dict(torch.load('transformer.pth'))
+                self.policy.load_state_dict(torch.load('gnn_rl.pth'))
+            except FileNotFoundError:
+                print("ML models not trained; run train_ml_models() first.")
 
     def solve(self, instance, embed_fn, domain_adapter=None):
         if domain_adapter:
             instance = domain_adapter(instance)
         diagram = embed_fn(instance, self.beta)
-        knot = snappy.Link(braid=diagram)  # Updated for braid list
+        knot = snappy.Link(braid=diagram)
         pq = PriorityQueue()
         for locus in get_loci(knot):
             score = compute_density(locus)
