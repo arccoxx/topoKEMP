@@ -1,6 +1,6 @@
 from queue import PriorityQueue
 import torch
-import random  # Added for random in diagram_to_graph
+import random
 from .ml_models import KnotTransformer, GNNRLPolicy
 from .simplifiers import apply_z_move, factorize
 from .utils import quick_invariants, is_unknot, get_loci, compute_density
@@ -44,16 +44,18 @@ class TopoKEMP:
             return True, "Invariant unknot", inv
         if self.use_ml:
             state = self.diagram_to_graph(knot)
-            confidence = self.transformer.classify(state)
+            state_tensor = torch.tensor(state).float().unsqueeze(0)  # Convert to tensor (1,10)
+            confidence = self.transformer.classify(state_tensor)
             if confidence > 0.95:
                 return confidence > 0.5, "ML heuristic", confidence
             while not is_unknot(knot):
-                moves = self.policy.predict_moves(state, k=5)
+                moves = self.policy.predict_moves(state_tensor, k=5)
                 for move in moves:
                     if self.valid_move(move, knot):
                         self.apply_move(knot, move)
                         break
-                state = self.update_state(knot)
+                state = self.diagram_to_graph(knot)
+                state_tensor = torch.tensor(state).float().unsqueeze(0)
         if self.certified:
             is_trivial = self.lackenby_certify(knot)
             return is_trivial, "Certified", None
@@ -67,9 +69,9 @@ class TopoKEMP:
         return sub
 
     def diagram_to_graph(self, knot):
-        import networkx as nx
-        G = nx.Graph()
-        return G
+        # Updated: Return fixed-size list (10 features) for tensor
+        features = [knot.crossing_number()] + [random.random() for _ in range(9)]
+        return features
 
     def update_state(self, knot):
         return self.diagram_to_graph(knot)
