@@ -26,37 +26,37 @@ def embed_tsp(instance, beta=1.0):
     return pd
 
 def embed_dna(instance, beta=1.0):
-    sequence = instance['sequence'] if isinstance(instance, dict) else instance
-    from Bio.Seq import Seq
-    seq = Seq(sequence)
-    length = len(seq) // beta
-    return generate_random_braid(4, length)
+    length = instance['length'] if isinstance(instance, dict) else len(instance)
+    return generate_random_braid(4, length // beta)
 
 def embed_protein(instance, beta=1.0):
-    structure = instance['structure'] if isinstance(instance, dict) else instance
-    chain_len = len(list(structure.get_chains())[0])
+    chain_len = instance['chain_len'] if isinstance(instance, dict) else len(instance)
     return generate_random_braid(3, chain_len // beta)
 
 def embed_molecular(instance, beta=1.0):
-    mol = instance['mol'] if isinstance(instance, dict) else instance
-    bonds = mol.GetBonds()
-    crossings = len(bonds) // beta
-    return generate_random_braid(5, crossings)
+    bonds_len = instance['bonds_len'] if isinstance(instance, dict) else len(instance)
+    return generate_random_braid(5, bonds_len // beta)
 
 def embed_polymer(instance, beta=1.0):
-    chain = instance['chain'] if isinstance(instance, dict) else instance
-    return generate_random_braid(len(chain) // beta, 20)
+    chain_len = instance['chain_len'] if isinstance(instance, dict) else len(instance)
+    return generate_random_braid(chain_len // beta, 20)
 
 def embed_quantum_braid(instance, beta=1.0):
-    circuit = instance['circuit'] if isinstance(instance, dict) else instance
-    braid_len = len(circuit) // beta
+    gates = instance['gates'] if isinstance(instance, dict) else instance
+    braid_len = len(gates) // beta
     return generate_random_braid(3, braid_len)
 
 def embed_fluid_knot(instance, beta=1.0):
-    lines = instance['lines'] if isinstance(instance, dict) else instance
-    return generate_random_braid(len(lines) // beta, 30)
+    lines_len = instance['lines_len'] if isinstance(instance, dict) else len(instance)
+    return generate_random_braid(lines_len // beta, 30)
 
 def embed_robot_path(instance, beta=1.0):
-    graph = instance['graph'] if isinstance(instance, dict) else instance
-    crossings = graph.number_of_edges() // beta
-    return generate_random_braid(graph.number_of_nodes(), crossings)
+    if isinstance(instance, dict):
+        edges_len = instance['edges_len']
+        nodes_len = instance['nodes_len']
+    else:
+        G = nx.Graph(instance)
+        edges_len = G.number_of_edges()
+        nodes_len = G.number_of_nodes()
+    crossings = edges_len // beta
+    return generate_random_braid(nodes_len, crossings)
