@@ -71,6 +71,28 @@ def train_ml_models(num_samples=1000, epochs=50):
     
     torch.save(model.state_dict(), 'transformer.pth')
     
-    # Similar for GNNRLPolicy (PPO training placeholder)
+    # RL Meta-Learning (MAML simulation for policy adaptation)
     policy = GNNRLPolicy()
+    meta_optimizer = optim.Adam(policy.parameters(), lr=0.001)
+    inner_lr = 0.01
+    tasks = [generate_random_braid() for _ in range(5)]  # Dummy tasks
+    for task in tasks:
+        adapted_policy = GNNRLPolicy()  # Copy for inner loop
+        adapted_policy.load_state_dict(policy.state_dict())
+        inner_optimizer = optim.SGD(adapted_policy.parameters(), lr=inner_lr)
+        # Inner loop: Adapt to task
+        for step in range(2):  # Inner steps
+            state = torch.tensor([random.random() for _ in range(10)]).float().unsqueeze(0)
+            output, value = adapted_policy(state)
+            loss = value.mean()  # Dummy loss
+            inner_optimizer.zero_grad()
+            loss.backward()
+            inner_optimizer.step()
+        # Outer update
+        state = torch.tensor([random.random() for _ in range(10)]).float().unsqueeze(0)
+        output, value = adapted_policy(state)
+        meta_loss = value.mean()
+        meta_optimizer.zero_grad()
+        meta_loss.backward()
+        meta_optimizer.step()
     torch.save(policy.state_dict(), 'gnn_rl.pth')
