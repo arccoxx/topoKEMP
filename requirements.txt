@@ -1,4 +1,3 @@
-snappy
 torch
 numpy
 matplotlib
