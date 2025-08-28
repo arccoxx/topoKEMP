@@ -5,7 +5,7 @@ from torch.utils.data import DataLoader, TensorDataset
 from .utils import generate_random_braid, extract_features, is_unknot
 import numpy as np
 import networkx as nx
-import random  # Added for random in dummy state
+import random  # Added for random in dummy state during training
 
 class KnotTransformer(nn.Module):
     def __init__(self):
