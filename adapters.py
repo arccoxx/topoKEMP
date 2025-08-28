@@ -29,5 +29,8 @@ def fluid_adapter(field_lines):
     return {'lines_len': len(field_lines)}
 
 def robotics_adapter(paths):
-    G = nx.Graph(paths)
-    return {'edges_len': G.number_of_edges(), 'nodes_len': G.number_of_nodes()}
+    G = nx.Graph()
+    for edge, weight in paths.items():
+        u, v = edge
+        G.add_edge(u, v, weight=weight)
+    return {'graph': G, 'edges_len': G.number_of_edges(), 'nodes_len': G.number_of_nodes()}
