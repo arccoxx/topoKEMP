@@ -6,7 +6,7 @@ This project was developed through a collaborative conversation exploring knot t
 - **KEMP Core**: Embed problem → Analyze knot (simplify, invariants) → Interpret (trivial = yes).
 - **eKEMP Enhancements**: Layers (classical, ML, quantum-inspired), optimizations (dynamic β, meta-RL, caching).
 - **TopoKEMP Unification**: Full pipeline with parallel/GPU, tested on 17 knot problems.
-- **Proxy Mode**: For testing without SnapPy; simulates solves with dummy data/results.
+- **Proxy Mode**: For testing without SnapPy; simulates solves with abbreviatd support (working on snappy integration)
 - **ML Pipeline**: Trains on generated/real knot data (e.g., Rolfsen table) for 95% accuracy.
 - **Benchmarks/Use Cases**: Demonstrates 2-50x gains in tangled domains like molecular biology.
 For a new chat/AI to pick up: Scan this README and the repo files (core.py for solver, ml_models.py for training, etc.). Test with `test_*.py` scripts in /tests. To switch to real SnapPy, replace proxy import in core.py/utils.py with `import snappy`.
