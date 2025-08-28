@@ -9,35 +9,37 @@ import networkx as nx
 class KnotTransformer(nn.Module):
     def __init__(self):
         super().__init__()
-        self.transformer = nn.Transformer(d_model=512, nhead=8)
-        self.fc = nn.Linear(512, 2)  # Binary classify
+        self.fc = nn.Linear(10, 2)  # Dummy for list input
 
     def forward(self, x):
-        x = self.transformer(x, x)
-        return self.fc(x.mean(dim=1))
+        return self.fc(torch.tensor(x))
 
     def classify(self, state):
         with torch.no_grad():
-            output = self(state.unsqueeze(0))
-            prob = torch.softmax(output, dim=1)[0][1].item()
+            output = self.forward(state)
+            prob = torch.softmax(output, dim=0)[1].item()
             return prob
 
 class GNNRLPolicy(nn.Module):
     def __init__(self):
         super().__init__()
-        self.gnn = nn.Linear(10, 32)  # Simple; use proper GNN like torch_geometric
-        self.actor = nn.Linear(32, 5)  # 5 move types
+        self.fc1 = nn.Linear(10, 32)
+        self.actor = nn.Linear(32, 5)
         self.critic = nn.Linear(32, 1)
 
-    def forward(self, graph):
-        # Graph features
-        feats = torch.tensor([1.0] * 10)  # Dummy
-        embed = self.gnn(feats)
+    def forward(self, state):
+        embed = torch.relu(self.fc1(torch.tensor(state)))
         return self.actor(embed), self.critic(embed)
 
+    def classify(self, state):
+        with torch.no_grad():
+            output, _ = self.forward(state)
+            prob = torch.softmax(output, dim=1)[0][1].item()
+            return prob
+
     def predict_moves(self, state, k=5):
-        actor, _ = self(state)
-        return torch.topk(actor, k).indices.tolist()
+        output, _ = self.forward(state)
+        return torch.topk(output, k).indices.tolist()
 
 def train_ml_models(num_samples=1000, epochs=50):
     features, labels = [], []
@@ -62,7 +64,7 @@ def train_ml_models(num_samples=1000, epochs=50):
     for epoch in range(epochs):
         for inputs, targets in loader:
             optimizer.zero_grad()
-            outputs = model(inputs.unsqueeze(1))  # Seq dim
+            outputs = model(inputs)
             loss = criterion(outputs, targets)
             loss.backward()
             optimizer.step()
