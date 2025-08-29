@@ -111,7 +111,7 @@ Solve with solver.solve(instance, embed_fn, adapter).
 - benchmark_topokemp.py: Timing benchmarks.
 
 ## Benchmarks
-See benchmark_topokemp.py for code (unknot/SAT/TSP vs. baselines, 2-10x gains).
+See benchmark_topokemp.py for code (unknot/SAT/TSP vs. baselines, potential gains).
 
 ## Use Cases
 - Molecular Biology: Embed DNA as braids; unknot for resolution.
