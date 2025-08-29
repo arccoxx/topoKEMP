@@ -1,9 +1,10 @@
 from queue import PriorityQueue
 import torch
+import random
 from .ml_models import KnotTransformer, GNNRLPolicy
 from .simplifiers import apply_z_move, factorize
 from .utils import quick_invariants, is_unknot, get_loci, compute_density
-from .snappy_proxy import Link, Manifold  # Use proxy
+from .snappy_proxy import Link, Manifold
 
 class TopoKEMP:
     def __init__(self, beta=1.0, use_ml=True, certified=False):
@@ -25,7 +26,7 @@ class TopoKEMP:
         if domain_adapter:
             instance = domain_adapter(instance)
         diagram = embed_fn(instance, self.beta)
-        knot = Link(braid=diagram)  # Proxy Link
+        knot = Link(braid=diagram, framing=random.randint(-5, 5))  # Add random framing for test
         pq = PriorityQueue()
         for locus in get_loci(knot):
             score = compute_density(locus)
@@ -43,16 +44,18 @@ class TopoKEMP:
             return True, "Invariant unknot", inv
         if self.use_ml:
             state = self.diagram_to_graph(knot)
-            confidence = self.transformer.classify(state)
+            state_tensor = torch.tensor(state).float().unsqueeze(0)
+            confidence = self.transformer.classify(state_tensor)
             if confidence > 0.95:
                 return confidence > 0.5, "ML heuristic", confidence
             while not is_unknot(knot):
-                moves = self.policy.predict_moves(state, k=5)
+                moves = self.policy.predict_moves(state_tensor, k=5)
                 for move in moves:
                     if self.valid_move(move, knot):
                         self.apply_move(knot, move)
                         break
-                state = self.update_state(knot)
+                state = self.diagram_to_graph(knot)
+                state_tensor = torch.tensor(state).float().unsqueeze(0)
         if self.certified:
             is_trivial = self.lackenby_certify(knot)
             return is_trivial, "Certified", None
@@ -66,7 +69,7 @@ class TopoKEMP:
         return sub
 
     def diagram_to_graph(self, knot):
-        return [random.random() for _ in range(10)]  # Dummy state list for test
+        return [random.random() for _ in range(10)]  # Dummy
 
     def update_state(self, knot):
         return self.diagram_to_graph(knot)
