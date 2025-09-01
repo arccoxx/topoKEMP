@@ -1,6 +1,7 @@
 from queue import PriorityQueue
 import torch
 import random
+import multiprocessing as mp
 from .ml_models import KnotTransformer, GNNRLPolicy
 from .simplifiers import apply_z_move, factorize
 from .utils import quick_invariants, is_unknot, get_loci, compute_density
@@ -26,7 +27,7 @@ class TopoKEMP:
         if domain_adapter:
             instance = domain_adapter(instance)
         diagram = embed_fn(instance, self.beta)
-        knot = Link(braid=diagram, framing=random.randint(-5, 5))  # Add random framing for test
+        knot = Link(braid=diagram)
         pq = PriorityQueue()
         for locus in get_loci(knot):
             score = compute_density(locus)
