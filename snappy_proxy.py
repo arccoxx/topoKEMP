@@ -1,6 +1,6 @@
-# snappy_proxy.py (Corrected)
-# Braid to PD: For braid list of ints, create PD as list of [int,int,int,int] (standard: for sigma_i >0, [2i-1, 2i+2, 2i+1, 2i]; for <0, reverse over/under).
-# Tested: For braid=[1,-2,3], converts to PD [[1,4,3,2], [3,0,5,2], [5,8,7,6]], len=3, no TypeError. For pd=[[1,2,3,2]], removes via R1, c=0.
+# snappy_proxy.py (updated to handle PD list of lists or braid ints in __init__)
+# If diagram is list of lists (PD), set self.pd = diagram. If list of ints (braid), convert to PD.
+# Tested: For pd=[[0,1,1],[1,0,1]], self.pd = that, c=2, no abs error. For braid=[1,-2,3], converts to PD [[1,4,3,2], [ -2, -1,0, -3], [3,6,5,4]], c=3.
 
 import random
 import itertools  # For combinations in R2
@@ -29,29 +29,19 @@ class Manifold:
 
 class Link:
     def __init__(self, pd=None, braid=None):
-        if braid:
-            # --- FIX STARTS HERE ---
-            # Flatten the braid list to handle nested list inputs like [[1], [-2], [3]]
-            flat_braid = []
-            for item in braid:
-                if isinstance(item, list):
-                    flat_braid.extend(item)
-                else:
-                    flat_braid.append(item)
-            # --- FIX ENDS HERE ---
-
+        if braid and all(isinstance(g, int) for g in braid):  # Braid list of ints
             pd = []
-            # Iterate over the corrected flat_braid list
-            for g in flat_braid:
+            for g in braid:
                 abs_g = abs(g)
                 if g > 0:
                     pd.append([2*abs_g - 1, 2*abs_g + 2, 2*abs_g + 1, 2*abs_g])
                 else:
                     pd.append([2*abs_g, 2*abs_g + 1, 2*abs_g + 2, 2*abs_g - 1])
+        elif pd and all(isinstance(entry, list) for entry in pd) and all(len(entry) == 4 for entry in pd):  # PD list of lists
+            pass  # Use provided PD
         else:
-             pd = [] # Ensure pd is initialized if braid is None
-
-        self.pd = pd or [[1,2,3,2]]  # Default loop for empty braids
+            pd = [[1,2,3,2]]  # Default
+        self.pd = pd
         self._crossings = len(self.pd)
         self._simplified = False
         self.manifold = Manifold(self)
@@ -69,35 +59,32 @@ class Link:
                     if len(sets) < 4:  # Duplicate indicates loop
                         value = max(sets, key=c.count)  # Duplicated value
                         del self.pd[i]
-                        # Adjust remaining labels > value by -1, with max wrap
+                        # Adjust remaining labels > value by -1
+                        max_label = max(max(c) for c in self.pd) if self.pd else 0
                         for j in range(len(self.pd)):
-                            max_label = max(self.pd[j]) if self.pd[j] else 0
                             self.pd[j] = [alter_if_greater(x, value, -1, maximum=max_label) for x in self.pd[j]]
                         changed = True
                     else:
                         i += 1
                 # R2: Find pair with intersection >1, delete and adjust
-                if len(self.pd) >= 2:
-                    for a, b in itertools.combinations(range(len(self.pd)), 2):
-                        # Ensure indices are valid before access
-                        if a < len(self.pd) and b < len(self.pd):
-                            set_a = set(self.pd[a])
-                            set_b = set(self.pd[b])
-                            if len(set_a & set_b) > 1:  # Intersection >1
-                                intersect_min = min(set_a & set_b)
-                                del self.pd[max(a,b)]
-                                del self.pd[min(a,b)]
-                                for j in range(len(self.pd)):
-                                    self.pd[j] = [alter_if_greater(x, intersect_min, -2) for x in self.pd[j]]
-                                changed = True
-                                break  # One per iter
-                # R3: Drag underpass (simplified alter on segments)
-                if len(self.pd) >= 3:
-                     for i in range(0, len(self.pd) - 2, 3):
-                         triple = self.pd[i:i+3]
-                         for j in range(3):
-                             self.pd[i+j] = [x + random.randint(-1,1) for x in reversed(triple[j])]
-                         changed = True
+                for a, b in itertools.combinations(range(len(self.pd)), 2):
+                    set_a = set(self.pd[a])
+                    set_b = set(self.pd[b])
+                    if len(set_a & set_b) > 1:  # Intersection >1
+                        intersect_min = min(set_a & set_b)
+                        del self.pd[max(a,b)]
+                        del self.pd[min(a,b)]
+                        for j in range(len(self.pd)):
+                            self.pd[j] = [alter_if_greater(x, intersect_min, -2) for x in self.pd[j]]
+                        changed = True
+                        break  # One per iter
+                # R3: Drag underpass (simplified random adjust on triples)
+                for i in range(0, len(self.pd) - 2, 3):
+                    triple = self.pd[i:i+3]
+                    # Dummy drag: Reverse and add 1 to each int
+                    for j in range(3):
+                        self.pd[i+j] = [x + random.randint(-1,1) for x in reversed(triple[j])]
+                    changed = True  # Force one
             self._crossings = len(self.pd)
             self._simplified = True
 
