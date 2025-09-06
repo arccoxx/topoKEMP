@@ -1,7 +1,6 @@
 from queue import PriorityQueue
 import torch
 import random
-import multiprocessing as mp
 from .ml_models import KnotTransformer, GNNRLPolicy
 from .simplifiers import apply_z_move, factorize
 from .utils import quick_invariants, is_unknot, get_loci, compute_density
@@ -36,10 +35,14 @@ class TopoKEMP:
             _, locus = pq.get()
             apply_z_move(knot, locus)
             if self.is_connected_sum(knot):
-                subs = factorize(knot)
+                subs = knot.deconnect_sum()  # New from paper
                 results = [self.simplify_sub(sub) for sub in subs]
                 if all(is_unknot(sub) for sub in results):
                     return True, "Factored trivial", results
+                # Non-additive u from paper
+                u_subs = [sub.crossing_number() for sub in subs]
+                u_bound = sum(u_subs) - 1  # < sum u(sub)
+                print("Non-additive u bound:", u_bound)
         inv = quick_invariants(knot)
         if inv['jones'] == 1 and inv['alexander'] == 1 and inv['volume'] < 1e-10:
             return True, "Invariant unknot", inv
