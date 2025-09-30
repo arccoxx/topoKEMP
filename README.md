@@ -7,7 +7,7 @@ TopoKEMP is a Python package designed to embed combinatorial and real-world "tan
 
 **Note on ML Features**: The ML pipeline (e.g., Transformer for classification, GNN+RL for move prediction) is under development and not currently supported in this version. Future releases will integrate it for heuristic speedups.
 
-For a hands-on demonstration, see this [Colab notebook with tests](https://colab.research.google.com/drive/1example).
+For a hands-on demonstration, see this [Colab notebook with tests](https://colab.research.google.com/drive/1E0aaPhfHan936NoVgX83HWNH_cp9R9hN?usp=sharing).
 **Repository**: https://github.com/arccoxx/topoKEMP
 
 ## Mathematical Description of the Non-ML TopoKEMP Method
