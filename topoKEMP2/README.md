@@ -10,6 +10,40 @@ topoKEMP2 is an improved framework for solving SAT problems using topological kn
 
 This version focuses exclusively on **non-ML approaches**, using rigorous mathematical methods targeting **linear-time** SAT solving through knot theory.
 
+## Quick Start (v3.0)
+
+```python
+from topoKEMP2 import solve, Problem
+
+# Solve SAT directly
+result = solve([[1, 2], [-1, 3]])
+print(result)  # SAT (solved in 0.15ms using linear)
+
+# Solve N-Queens
+problem = Problem.from_nqueens(8)
+result = problem.solve()
+print(problem.decode(result.assignment))
+
+# Solve Sudoku
+problem = Problem.from_sudoku(grid)
+result = problem.solve()
+```
+
+## Version 3.0 - New Features
+
+### User-Friendly API
+- `solve(clauses)` - Simple SAT solving
+- `Problem.from_nqueens(n)` - N-Queens problem
+- `Problem.from_sudoku(grid)` - Sudoku puzzles
+- `Problem.from_graph_coloring(edges, k)` - Graph coloring
+
+### Code Optimizer (Experimental)
+```python
+from topoKEMP2 import analyze_code, optimize_code
+analysis = analyze_code(code)
+optimized = optimize_code(code)
+```
+
 ## Version 2.1 - Major Improvements
 
 ### Linear-Time Solver
