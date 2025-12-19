@@ -1,0 +1,509 @@
+{
+  "metadata": {
+    "timestamp": "2025-12-19T22:56:45.783382",
+    "var_sizes": [
+      5,
+      10,
+      15,
+      20,
+      25,
+      30
+    ],
+    "samples_per_size": 3,
+    "clause_ratio": 2.0,
+    "solvers": [
+      "linear",
+      "proven",
+      "topological"
+    ],
+    "satisfiable_only": false
+  },
+  "results": [
+    {
+      "num_vars": 5,
+      "num_clauses": 10,
+      "solver_name": "linear",
+      "solve_time_ms": 0.22824999996373663,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 5,
+      "num_clauses": 10,
+      "solver_name": "proven",
+      "solve_time_ms": 0.19310900000846232,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 5,
+      "num_clauses": 10,
+      "solver_name": "topological",
+      "solve_time_ms": 0.14641600000686594,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 5,
+      "num_clauses": 10,
+      "solver_name": "linear",
+      "solve_time_ms": 0.17528499995478342,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 5,
+      "num_clauses": 10,
+      "solver_name": "proven",
+      "solve_time_ms": 0.14195899996138905,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 5,
+      "num_clauses": 10,
+      "solver_name": "topological",
+      "solve_time_ms": 0.13271099999201397,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 5,
+      "num_clauses": 10,
+      "solver_name": "linear",
+      "solve_time_ms": 0.18021099998577483,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 5,
+      "num_clauses": 10,
+      "solver_name": "proven",
+      "solve_time_ms": 0.14153600000099686,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 5,
+      "num_clauses": 10,
+      "solver_name": "topological",
+      "solve_time_ms": 0.17583299995749258,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 10,
+      "num_clauses": 20,
+      "solver_name": "linear",
+      "solve_time_ms": 0.3333079999947586,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 10,
+      "num_clauses": 20,
+      "solver_name": "proven",
+      "solve_time_ms": 0.36368299998912335,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 10,
+      "num_clauses": 20,
+      "solver_name": "topological",
+      "solve_time_ms": 0.28125999995154416,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 10,
+      "num_clauses": 20,
+      "solver_name": "linear",
+      "solve_time_ms": 0.335421000045244,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 10,
+      "num_clauses": 20,
+      "solver_name": "proven",
+      "solve_time_ms": 0.34979700001258607,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 10,
+      "num_clauses": 20,
+      "solver_name": "topological",
+      "solve_time_ms": 0.30977300002632546,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 10,
+      "num_clauses": 20,
+      "solver_name": "linear",
+      "solve_time_ms": 0.29782199999317527,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 10,
+      "num_clauses": 20,
+      "solver_name": "proven",
+      "solve_time_ms": 0.4243950000386576,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 10,
+      "num_clauses": 20,
+      "solver_name": "topological",
+      "solve_time_ms": 0.2767309999853751,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 15,
+      "num_clauses": 30,
+      "solver_name": "linear",
+      "solve_time_ms": 0.6743479999613555,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 15,
+      "num_clauses": 30,
+      "solver_name": "proven",
+      "solve_time_ms": 0.6100840000158314,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 15,
+      "num_clauses": 30,
+      "solver_name": "topological",
+      "solve_time_ms": 0.56126000004042,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 15,
+      "num_clauses": 30,
+      "solver_name": "linear",
+      "solve_time_ms": 0.4918189999898459,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 15,
+      "num_clauses": 30,
+      "solver_name": "proven",
+      "solve_time_ms": 0.5646120000051269,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 15,
+      "num_clauses": 30,
+      "solver_name": "topological",
+      "solve_time_ms": 0.4125400000134505,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 15,
+      "num_clauses": 30,
+      "solver_name": "linear",
+      "solve_time_ms": 3.1352380000271296,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 15,
+      "num_clauses": 30,
+      "solver_name": "proven",
+      "solve_time_ms": 0.5812780000269413,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 15,
+      "num_clauses": 30,
+      "solver_name": "topological",
+      "solve_time_ms": 3.128187000015714,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 20,
+      "num_clauses": 40,
+      "solver_name": "linear",
+      "solve_time_ms": 0.7341269999869837,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 20,
+      "num_clauses": 40,
+      "solver_name": "proven",
+      "solve_time_ms": 1.050765999991654,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 20,
+      "num_clauses": 40,
+      "solver_name": "topological",
+      "solve_time_ms": 0.6257119999872884,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 20,
+      "num_clauses": 40,
+      "solver_name": "linear",
+      "solve_time_ms": 0.6460800000240852,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 20,
+      "num_clauses": 40,
+      "solver_name": "proven",
+      "solve_time_ms": 0.9227140000120926,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 20,
+      "num_clauses": 40,
+      "solver_name": "topological",
+      "solve_time_ms": 0.5667340000172771,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 20,
+      "num_clauses": 40,
+      "solver_name": "linear",
+      "solve_time_ms": 0.6870109999681517,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 20,
+      "num_clauses": 40,
+      "solver_name": "proven",
+      "solve_time_ms": 1.0051579999981186,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 20,
+      "num_clauses": 40,
+      "solver_name": "topological",
+      "solve_time_ms": 0.5919769999991331,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 25,
+      "num_clauses": 50,
+      "solver_name": "linear",
+      "solve_time_ms": 1.9957279999971433,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 25,
+      "num_clauses": 50,
+      "solver_name": "proven",
+      "solve_time_ms": 1.3049080000087088,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 25,
+      "num_clauses": 50,
+      "solver_name": "topological",
+      "solve_time_ms": 1.8430160000093565,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 25,
+      "num_clauses": 50,
+      "solver_name": "linear",
+      "solve_time_ms": 0.8547479999947427,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 25,
+      "num_clauses": 50,
+      "solver_name": "proven",
+      "solve_time_ms": 1.3741410000420728,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 25,
+      "num_clauses": 50,
+      "solver_name": "topological",
+      "solve_time_ms": 0.7544339999867589,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 25,
+      "num_clauses": 50,
+      "solver_name": "linear",
+      "solve_time_ms": 17.187045000014223,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 25,
+      "num_clauses": 50,
+      "solver_name": "proven",
+      "solve_time_ms": 1.4870690000066134,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 25,
+      "num_clauses": 50,
+      "solver_name": "topological",
+      "solve_time_ms": 16.885761000025923,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 30,
+      "num_clauses": 60,
+      "solver_name": "linear",
+      "solve_time_ms": 284.29637300001787,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 30,
+      "num_clauses": 60,
+      "solver_name": "proven",
+      "solve_time_ms": 1.877713999988373,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 30,
+      "num_clauses": 60,
+      "solver_name": "topological",
+      "solve_time_ms": 285.0107599999774,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 30,
+      "num_clauses": 60,
+      "solver_name": "linear",
+      "solve_time_ms": 2.790550999975494,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 30,
+      "num_clauses": 60,
+      "solver_name": "proven",
+      "solve_time_ms": 1.6730090000010023,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 30,
+      "num_clauses": 60,
+      "solver_name": "topological",
+      "solve_time_ms": 2.608287000043674,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 30,
+      "num_clauses": 60,
+      "solver_name": "linear",
+      "solve_time_ms": 4.9430010000151015,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 30,
+      "num_clauses": 60,
+      "solver_name": "proven",
+      "solve_time_ms": 1.858709000032377,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    },
+    {
+      "num_vars": 30,
+      "num_clauses": 60,
+      "solver_name": "topological",
+      "solve_time_ms": 4.680550000045969,
+      "result": "SAT",
+      "memory_kb": null,
+      "braid_length": null
+    }
+  ]
+}
