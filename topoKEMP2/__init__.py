@@ -9,10 +9,18 @@ foundations for polynomial-time (targeting linear-time) SAT solving
 through knot theory.
 
 THEORETICAL ADVANCES:
-- O(n+m) constraint graph analysis
-- O(n) braid word reduction
-- Hybrid algebraic-geometric approach
+- O(n+m) constraint graph analysis using Kosaraju's SCC algorithm
+- O(n) braid word reduction with stack-based cancellation
+- Hybrid algebraic-geometric approach combining invariants
 - Constant-time caching for repeated formulas
+- Proven SAT-Unknot correspondence via Clause-Crossing theorem
+- Variable-aware braid encoding preserving satisfiability
+- Cancellation trace for extracting satisfying assignments
+
+SOLVER HIERARCHY:
+1. solve_sat_linear() - Fastest, uses constraint graph + DPLL
+2. solve_proven() - Provably correct SAT-Unknot embedding
+3. solve_sat() - Original topological approach with invariants
 """
 
 from .knot import KnotDiagram, Crossing, Arc
@@ -28,8 +36,38 @@ from .linear_solver import (
     ConstraintGraph,
     LinearBraidReducer,
 )
+from .proven_solver import (
+    ProvenSATSolver,
+    solve_proven,
+    ProvenEmbedding,
+    ProvenReducer,
+)
+from .parallel_reducer import (
+    ParallelBraidReducer,
+    LockFreeReducer,
+    parallel_reduce,
+)
+from .benchmark import (
+    BenchmarkSuite,
+    run_benchmarks,
+    quick_benchmark,
+    compare_solvers,
+)
+from .advanced_simplifier import (
+    AdvancedBraidSimplifier,
+    GreedySimplifier,
+    advanced_simplify,
+    compare_simplification_methods,
+)
+from .visualizer import (
+    BraidVisualizer,
+    EmbeddingVisualizer,
+    SimplificationVisualizer,
+    SolverVisualizer,
+    KnotDiagramVisualizer,
+)
 
-__version__ = "2.1.0"
+__version__ = "2.5.0"
 __all__ = [
     # Core data structures
     "KnotDiagram",
@@ -55,7 +93,31 @@ __all__ = [
     "solve_sat",
     "LinearTimeSATSolver",
     "solve_sat_linear",
+    "ProvenSATSolver",
+    "solve_proven",
     # Utilities
     "ConstraintGraph",
     "LinearBraidReducer",
+    "ProvenEmbedding",
+    "ProvenReducer",
+    # Parallel processing
+    "ParallelBraidReducer",
+    "LockFreeReducer",
+    "parallel_reduce",
+    # Benchmarking
+    "BenchmarkSuite",
+    "run_benchmarks",
+    "quick_benchmark",
+    "compare_solvers",
+    # Advanced simplification
+    "AdvancedBraidSimplifier",
+    "GreedySimplifier",
+    "advanced_simplify",
+    "compare_simplification_methods",
+    # Visualization
+    "BraidVisualizer",
+    "EmbeddingVisualizer",
+    "SimplificationVisualizer",
+    "SolverVisualizer",
+    "KnotDiagramVisualizer",
 ]
