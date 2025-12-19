@@ -66,8 +66,21 @@ from .visualizer import (
     SolverVisualizer,
     KnotDiagramVisualizer,
 )
+from .api import (
+    solve,
+    Problem,
+    SolveResult,
+    SolverType,
+    reduce_to_sat,
+    benchmark_problem,
+)
+from .code_optimizer import (
+    analyze_code,
+    optimize_code,
+    CodeAnalysis,
+)
 
-__version__ = "2.5.0"
+__version__ = "3.0.0"
 __all__ = [
     # Core data structures
     "KnotDiagram",
@@ -120,4 +133,15 @@ __all__ = [
     "SimplificationVisualizer",
     "SolverVisualizer",
     "KnotDiagramVisualizer",
+    # User-friendly API
+    "solve",
+    "Problem",
+    "SolveResult",
+    "SolverType",
+    "reduce_to_sat",
+    "benchmark_problem",
+    # Code optimizer (experimental)
+    "analyze_code",
+    "optimize_code",
+    "CodeAnalysis",
 ]
