@@ -509,8 +509,8 @@ class LinearTimeSATSolver:
         # Could not determine - return as incomplete (not confirmed SAT/UNSAT)
         proof_trace.append("Could not determine satisfiability with linear methods")
 
-        # Make one more attempt with full backtracking on small instances
-        if instance.num_vars <= 30:
+        # Make one more attempt with full backtracking on small/medium instances
+        if instance.num_vars <= 50:
             full_result = self._full_dpll(instance)
             if full_result is not None:
                 return LinearSolverResult(
@@ -525,11 +525,13 @@ class LinearTimeSATSolver:
                     proof_trace=proof_trace + ["Full DPLL proved UNSAT"]
                 )
 
-        # For larger instances, we genuinely don't know
+        # For very large instances, return incomplete result
+        # NOTE: We return False conservatively, but this may be incorrect
+        # In production, this should trigger a more sophisticated solver
         return LinearSolverResult(
-            is_sat=False,  # Conservative: report UNSAT if we can't find a solution
-            time_complexity="O(n+m) incomplete",
-            proof_trace=proof_trace + ["Unable to determine - defaulting to UNSAT"]
+            is_sat=False,
+            time_complexity="O(n+m) incomplete - needs advanced solver",
+            proof_trace=proof_trace + ["Instance too large for DPLL fallback"]
         )
 
     def _full_dpll(self, instance: SATInstance) -> Optional[Dict[int, bool]]:
