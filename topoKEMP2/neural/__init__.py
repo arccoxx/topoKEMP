@@ -38,12 +38,30 @@ from .sat_nn import (
     make_simple_data,
 )
 
+from .topo_nn import (
+    TopoNeuralNetwork,
+    HybridTopoNetwork,
+    TopologicalOptimizer,
+    WeightBraid,
+    make_spiral_data,
+    make_moons_data,
+)
+
 __all__ = [
+    # SAT-based
     "SATNeuralNetwork",
     "BinaryNeuralNetwork",
     "train_sat",
+    # Topological
+    "TopoNeuralNetwork",
+    "HybridTopoNetwork",
+    "TopologicalOptimizer",
+    "WeightBraid",
+    # Datasets
     "make_xor_data",
     "make_and_data",
     "make_or_data",
     "make_simple_data",
+    "make_spiral_data",
+    "make_moons_data",
 ]
