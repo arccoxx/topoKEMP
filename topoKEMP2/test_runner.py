@@ -57,16 +57,18 @@ class TestLogger:
         self.results.append(result)
         print(f"{'✓' if result.passed else '✗'} {result.test_name}: {result.actual_result}")
 
-    def save(self):
-        """Save all results to file."""
-        timestamp = self.start_time.strftime("%Y%m%d_%H%M%S")
-        filename = os.path.join(self.results_dir, f"test_results_{timestamp}.json")
+    def save(self, name: str = "sat_solver"):
+        """Save all results to file with descriptive name."""
+        # Use descriptive name instead of timestamp
+        filename = os.path.join(self.results_dir, f"{name}_test_results.json")
 
         summary = {
+            "test_suite": name,
             "timestamp": self.start_time.isoformat(),
             "total_tests": len(self.results),
             "passed": sum(1 for r in self.results if r.passed),
             "failed": sum(1 for r in self.results if not r.passed),
+            "pass_rate": f"{100 * sum(1 for r in self.results if r.passed) / len(self.results):.1f}%",
             "results": [asdict(r) for r in self.results]
         }
 
@@ -74,7 +76,7 @@ class TestLogger:
             json.dump(summary, f, indent=2)
 
         # Also save human-readable summary
-        summary_file = os.path.join(self.results_dir, f"summary_{timestamp}.txt")
+        summary_file = os.path.join(self.results_dir, f"{name}_summary.txt")
         with open(summary_file, 'w') as f:
             f.write(f"topoKEMP2 Test Results\n")
             f.write(f"=" * 60 + "\n")
@@ -396,7 +398,7 @@ def run_all_tests():
     # Save Results
     # ==========================================================================
     print("\n" + "=" * 60)
-    json_file, summary_file = logger.save()
+    json_file, summary_file = logger.save("sat_solver")
 
     total = len(logger.results)
     passed = sum(1 for r in logger.results if r.passed)
